@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-page: #05060A;
+    --bg-card: #0B0F1A;
+    --bg-raised: #121829;
+    --primary-blue: #1F5BFF;
+    --primary-glow: #0047FF;
+    --accent-lime: #C6FF00;
+    --status-amber: #FFB020;
+    --status-red: #FF3B4E;
+    --text-main: #F2F5FF;
+    --text-muted: #8A94B2;
+  }
+
+  body {
+    background-color: #05060A;
+    color: #F2F5FF;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom glow and animated rings */
+.glow-lime {
+  box-shadow: 0 0 35px -5px rgba(198, 255, 0, 0.45);
+}
+
+.glow-blue {
+  box-shadow: 0 0 35px -5px rgba(31, 91, 255, 0.5);
+}
+
+.glow-amber {
+  box-shadow: 0 0 35px -5px rgba(255, 176, 32, 0.45);
+}
+
+.glow-red {
+  box-shadow: 0 0 40px -5px rgba(255, 59, 78, 0.55);
+}
+
+/* Subtle border utility for cards */
+.alaya-card {
+  background-color: #0B0F1A;
+  border: 1px solid rgba(31, 91, 255, 0.35);
+  border-radius: 16px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.alaya-card:hover {
+  border-color: rgba(31, 91, 255, 0.65);
+  box-shadow: 0 4px 20px -2px rgba(31, 91, 255, 0.15);
+}
+
+.alaya-raised {
+  background-color: #121829;
+  border: 1px solid rgba(31, 91, 255, 0.25);
+  border-radius: 14px;
+}
+
+/* Red status pulse animation */
+@keyframes ring-pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 78, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(255, 59, 78, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 78, 0);
+  }
+}
+
+.animate-pulse-red {
+  animation: ring-pulse-red 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Lime status pulse animation */
+@keyframes ring-pulse-lime {
+  0% {
+    box-shadow: 0 0 0 0 rgba(198, 255, 0, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(198, 255, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(198, 255, 0, 0);
+  }
+}
+
+.animate-pulse-lime {
+  animation: ring-pulse-lime 2.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05060A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 91, 255, 0.4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1F5BFF;
+}

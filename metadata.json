@@ -1,0 +1,6 @@
+{
+  "name": "ALAYA Hygiene Monitor",
+  "description": "ALAYA (AI-enabled Lavatory & Hygiene Assistant): Camera-free, predictive washroom hygiene monitor for schools.",
+  "requestFramePermissions": ["serial"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
