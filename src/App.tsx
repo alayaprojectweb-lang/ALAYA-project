@@ -6,9 +6,9 @@
 import React from 'react';
 import { AlayaProvider, useAlaya } from './context/AlayaContext';
 import { Navbar } from './components/Navbar';
+import { SmsAlertModal } from './components/SmsAlertModal';
 import { HomePage } from './pages/HomePage';
 import { PublicStatusPage } from './pages/PublicStatusPage';
-import { StaffPage } from './pages/StaffPage';
 import { AdminPage } from './pages/AdminPage';
 import { HardwarePage } from './pages/HardwarePage';
 import { SimulatorPage } from './pages/SimulatorPage';
@@ -24,8 +24,6 @@ const AppContent: React.FC = () => {
         return <HomePage />;
       case 'public':
         return <PublicStatusPage />;
-      case 'staff':
-        return <StaffPage />;
       case 'admin':
         return <AdminPage />;
       case 'hardware':
@@ -47,8 +45,11 @@ const AppContent: React.FC = () => {
         {renderActiveTab()}
       </main>
 
+      {/* Global Simulated SMS Alert Popup Modal */}
+      <SmsAlertModal />
+
       {/* Clean Global Footer */}
-      <footer className="border-t border-[#1F5BFF]/25 bg-[#080B14] py-8 text-xs text-[#8A94B2]">
+      <footer className="border-t border-[#1F5BFF]/25 bg-[#080B14] py-8 text-xs text-[#8A94B2] mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-extrabold text-[#F2F5FF] flex items-center">
@@ -60,11 +61,11 @@ const AppContent: React.FC = () => {
 
           <div className="flex items-center gap-1.5 text-xs text-[#C6FF00] font-mono">
             <ShieldCheck className="w-4 h-4 text-[#C6FF00]" />
-            <span>Measures the room, not the person. Zero cameras. Zero biometric capture.</span>
+            <span>Camera-free. Predictive. Dignified. Measures room, not person.</span>
           </div>
 
           <div className="text-[11px] font-mono text-[#8A94B2]">
-            School Science Exhibition 2026 · DPDP Act 2023 Compliant
+            Science & Mathematics Exhibition 2026-27 · Directorate of Education, GNCT of Delhi
           </div>
         </div>
       </footer>

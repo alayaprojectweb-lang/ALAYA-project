@@ -12,6 +12,8 @@ import {
   Lock,
   Layers,
   Sparkles,
+  Phone,
+  CameraOff,
 } from 'lucide-react';
 
 export const PrivacyPage: React.FC = () => {
@@ -81,10 +83,28 @@ export const PrivacyPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Explicit Phone Number & Visitor Privacy Section */}
+      <div className="p-6 rounded-2xl bg-[#0B0F1A] border-2 border-[#1F5BFF] shadow-[0_0_25px_rgba(31,91,255,0.25)] space-y-3">
+        <div className="flex items-center gap-2.5 text-[#C6FF00]">
+          <Phone className="w-5 h-5 text-[#C6FF00]" />
+          <h2 className="text-base font-bold text-[#F2F5FF]">
+            Janitor Contact Routing & Visitor Anonymity Commitment
+          </h2>
+        </div>
+        <p className="text-sm text-[#F2F5FF] font-medium leading-relaxed bg-[#121829] p-4 rounded-xl border border-[#1F5BFF]/30">
+          "Janitor phone numbers are stored only to route alerts to the right floor. ALAYA never stores who submitted a report, and never tracks any person's movements."
+        </p>
+        <p className="text-xs text-[#8A94B2] leading-relaxed">
+          {language === 'hi'
+            ? 'सफाई कर्मचारियों के फोन नंबर केवल उनके संबंधित तल पर एसएमएस चेतावनी भेजने के लिए सुरक्षित रखे जाते हैं। सार्वजनिक रिपोर्टर का कोई नाम, आईपी, या फोन नंबर कभी नहीं लिया जाता।'
+            : 'Phone numbers are masked in administrative views (+91 98••••••12). When a visitor reports an issue or CUS reaches Red, the automated gateway sends an alert solely to the floor janitor.'}
+        </p>
+      </div>
+
       {/* Side-by-side What We Collect vs What We NEVER Collect */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* What We NEVER Collect */}
-        <div className="alaya-card p-6 border-[#FF3B4E]/40 bg-[#FF3B4E]/5 space-y-4">
+        <div className="p-6 rounded-2xl bg-[#0B0F1A] border border-[#FF3B4E]/40 shadow-md space-y-4">
           <div className="flex items-center gap-2 text-[#FF3B4E]">
             <ShieldX className="w-6 h-6" />
             <h2 className="text-lg font-bold">{t.whatWeNeverCollect}</h2>
@@ -118,14 +138,14 @@ export const PrivacyPage: React.FC = () => {
             <li className="flex items-start gap-2.5">
               <X className="w-4 h-4 text-[#FF3B4E] shrink-0 mt-0.5" />
               <span>
-                <strong>Zero Individual Staff Surveillance:</strong> Logs record room cleanliness verification delta, never individual cleaners' identities.
+                <strong>Zero Individual Staff Tracking:</strong> Logs record room cleanliness verification delta, never individual cleaners' identities.
               </span>
             </li>
           </ul>
         </div>
 
         {/* What We Collect */}
-        <div className="alaya-card p-6 border-[#C6FF00]/40 bg-[#C6FF00]/5 space-y-4">
+        <div className="p-6 rounded-2xl bg-[#0B0F1A] border border-[#C6FF00]/40 shadow-md space-y-4">
           <div className="flex items-center gap-2 text-[#C6FF00]">
             <ShieldCheck className="w-6 h-6" />
             <h2 className="text-lg font-bold">{t.whatWeCollect}</h2>
@@ -167,7 +187,7 @@ export const PrivacyPage: React.FC = () => {
       </div>
 
       {/* Physical Sensor Principles Table */}
-      <div className="alaya-card p-6 sm:p-8 space-y-6">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#0B0F1A] border border-[rgba(31,91,255,0.35)] space-y-6 shadow-md">
         <div>
           <h2 className="text-xl font-bold text-[#F2F5FF]">{t.sensorPrinciples}</h2>
           <p className="text-xs text-[#8A94B2]">
@@ -179,69 +199,17 @@ export const PrivacyPage: React.FC = () => {
           {sensorPrinciples.map((sp, idx) => (
             <div key={idx} className="p-4 rounded-xl bg-[#121829] border border-[#1F5BFF]/30 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-sm text-[#F2F5FF]">{sp.sensor}</span>
-                <span className="text-[10px] font-mono text-[#C6FF00]">{sp.telemetry}</span>
+                <span className="font-bold text-sm text-[#C6FF00] font-mono">{sp.sensor}</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#05060A] text-[#1F5BFF] border border-[#1F5BFF]/30">
+                  {sp.telemetry}
+                </span>
               </div>
-              <div className="text-xs text-[#1F5BFF] font-semibold">{sp.role}</div>
+              <div className="text-xs font-semibold text-[#F2F5FF]">{sp.role}</div>
               <p className="text-xs text-[#8A94B2] leading-relaxed">
                 {language === 'hi' ? sp.principleHi : sp.principle}
               </p>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Cost & Ethics Comparison Card (ALAYA vs Camera AI) */}
-      <div className="alaya-card p-6 sm:p-8 space-y-6">
-        <div>
-          <h2 className="text-xl font-bold text-[#F2F5FF]">{t.costComparison}</h2>
-          <p className="text-xs text-[#8A94B2]">
-            Why camera-free predictive sensors fundamentally outperform intrusive surveillance models in schools.
-          </p>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs font-mono">
-            <thead>
-              <tr className="border-b border-[#1F5BFF]/30 text-[#8A94B2]">
-                <th className="py-3 px-3">EVALUATION METRIC</th>
-                <th className="py-3 px-3 text-[#C6FF00] font-bold">ALAYA SMART MONITOR</th>
-                <th className="py-3 px-3 text-[#FF3B4E]">COMMERCIAL CAMERA AI</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#1F5BFF]/15">
-              <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-[#F2F5FF]">Unit Hardware Cost</td>
-                <td className="py-3 px-3 text-[#C6FF00] font-bold">~₹2,000 ($24 USD)</td>
-                <td className="py-3 px-3 text-[#8A94B2]">₹45,000+ ($540 USD) + GPU Server</td>
-              </tr>
-              <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-[#F2F5FF]">Privacy & Dignity</td>
-                <td className="py-3 px-3 text-[#C6FF00] font-bold">100% Dignified · Zero Video/Images</td>
-                <td className="py-3 px-3 text-[#FF3B4E]">Severe invasion · Highly contentious in schools</td>
-              </tr>
-              <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-[#F2F5FF]">Regulatory Compliance</td>
-                <td className="py-3 px-3 text-[#C6FF00]">DPDP Act 2023, GDPR & COPPA Compliant</td>
-                <td className="py-3 px-3 text-[#FF3B4E]">Illegal in private lavatory stalls under privacy laws</td>
-              </tr>
-              <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-[#F2F5FF]">Vandalism & Blind Spots</td>
-                <td className="py-3 px-3 text-[#C6FF00]">Hidden mesh enclosure, no lens to spray-paint</td>
-                <td className="py-3 px-3 text-[#8A94B2]">Lenses easily covered with gum, paper or spray paint</td>
-              </tr>
-              <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-[#F2F5FF]">Hygiene Verification</td>
-                <td className="py-3 px-3 text-[#C6FF00] font-bold">Empirical gas decay & floor dry-off</td>
-                <td className="py-3 px-3 text-[#8A94B2]">Visual only (cannot detect invisible stench or germs)</td>
-              </tr>
-              <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-[#F2F5FF]">Staff Dignity</td>
-                <td className="py-3 px-3 text-[#C6FF00]">Audits room environment, never workers</td>
-                <td className="py-3 px-3 text-[#FF3B4E]">Demoralizing micromanagement through video</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>

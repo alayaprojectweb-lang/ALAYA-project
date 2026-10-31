@@ -2,6 +2,8 @@ export type WashroomStatus = 'GREEN' | 'AMBER' | 'RED' | 'WET_FLOOR';
 
 export type VerificationState = 'IDLE' | 'SETTLING' | 'VERIFIED' | 'UNVERIFIED';
 
+export type WashroomType = 'Boys' | 'Girls' | 'Staff' | 'Unisex' | 'Accessible';
+
 export interface HistoryPoint {
   time: string;
   cus: number;
@@ -9,14 +11,24 @@ export interface HistoryPoint {
   foot: number;
 }
 
+export interface Floor {
+  id: string;
+  name: string;
+  nameHi?: string;
+  janitorName?: string;
+  janitorPhone: string; // stored as +91XXXXXXXXXX
+  smsAlertsActive: boolean;
+}
+
 export interface Washroom {
   id: string;
   name: string;
   nameHi: string;
   floor: string; // e.g. "Ground Floor", "First Floor"
-  floorHi: string; // e.g. "भूतल", "प्रथम तल"
-  staffId?: string; // e.g. "staff_gf"
-  staffPassword?: string; // e.g. "1234"
+  floorId?: string;
+  floorHi: string;
+  washroomType?: WashroomType;
+  janitorPhoneOverride?: string; // optional override for this specific washroom
   location: string;
   locationHi: string;
   airQuality: number; // 0-100 (Ammonia / VOC index)
@@ -70,6 +82,7 @@ export interface MaintenanceItem {
   timestamp: number;
   washroomId: string;
   washroomName: string;
+  floor?: string;
   fault: string;
   detail?: string;
   resolved: boolean;
@@ -116,10 +129,65 @@ export interface HardwareLogEntry {
 export type TabType =
   | 'home'
   | 'public'
-  | 'staff'
   | 'admin'
   | 'hardware'
   | 'simulator'
   | 'privacy';
 
 export type Language = 'en' | 'hi';
+
+export type SmsDeliveryMode = 'DEMO' | 'FAST2SMS' | 'LINK' | 'API';
+
+export interface SmsSettings {
+  mode: SmsDeliveryMode;
+  provider?: 'fast2sms' | 'twilio' | 'custom';
+  fast2smsApiKey?: string;
+  twilioSid?: string;
+  twilioToken?: string;
+  twilioFrom?: string;
+  backendEndpointUrl: string;
+  backendAccessKey: string;
+  dailyCap: number;
+  minGapMinutes: number;
+  maintenancePhone?: string;
+}
+
+export interface SmsLogEntry {
+  id: string;
+  timestamp: number;
+  floor: string;
+  washroom: string;
+  phone: string; // masked in UI (+91 98••••••12)
+  rawPhone: string; // 10-digit plain mobile
+  message: string;
+  status: 'Simulated' | 'Opened in app' | 'Sent' | 'Failed';
+  error?: string;
+  isTest?: boolean;
+}
+
+export interface ScoreFactorDiff {
+  name: string;
+  oldVal: number | string;
+  newVal: number | string;
+  weight: number;
+  pointsChange: number;
+  color: string;
+  desc: string;
+}
+
+export interface ScoreTimelineEvent {
+  id: string;
+  time: string;
+  timestamp: number;
+  washroomId: string;
+  washroomName: string;
+  oldScore: number;
+  newScore: number;
+  oldStatus: WashroomStatus;
+  newStatus: WashroomStatus;
+  reasonEn: string;
+  reasonHi: string;
+  topFactor?: string;
+  factors: ScoreFactorDiff[];
+  trigger?: string;
+}

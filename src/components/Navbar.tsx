@@ -18,7 +18,6 @@ export const Navbar: React.FC = () => {
   const navItems: { id: TabType; label: string; icon: React.ReactNode }[] = [
     { id: 'home', label: t.tabHome, icon: <Activity className="w-4 h-4" /> },
     { id: 'public', label: t.tabPublic, icon: <QrCode className="w-4 h-4" /> },
-    { id: 'staff', label: t.tabStaff, icon: <ShieldAlert className="w-4 h-4" /> },
     { id: 'admin', label: t.tabAdmin, icon: <BarChart3 className="w-4 h-4" /> },
     { id: 'hardware', label: t.tabHardware, icon: <Cpu className="w-4 h-4" /> },
     { id: 'simulator', label: t.tabSimulator, icon: <Sliders className="w-4 h-4" /> },
